@@ -21,7 +21,12 @@ For i = 2 To lastrow
   If Cells(i, 1).Value <> tick Then
      Cells(j, 9).Value = tick
      Cells(j, 10).Value = closep - openp
-     Cells(j, 11).Value = Round(((Cells(j, 10) / openp) * 100), 2)
+     If openp <> 0 Then
+        Cells(j, 11).Value = Round(((Cells(j, 10) / openp) * 100), 2)
+     Else
+         'if aboveformula used closep instead of openp - the percentage would be 100 - so if openp is 0 ...
+         Cells(j, 11) = 100
+     End If
      Cells(j, 12).Value = totvol
      If totvol > greatv Then
          'greatest volume chk
